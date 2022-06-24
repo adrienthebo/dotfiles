@@ -1,0 +1,45 @@
+# Editors and developer tooling
+*.swp
+tags
+tags.lock
+tags.temp
+.ctags
+.envrc
+
+# Build files
+*.o
+/target
+
+# Ruby
+.rvmrc
+pkg/*
+.yardoc
+
+.bundle
+.vagrant
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+.eggs
+.pytest_cache
+*.egg-info
+.mypy_cache
+
+# Terraform
+.terraform
+terraform.tfstate
+terraform.tfstate.*
+
+# Kicad
+*-cache.lib
+*.bak
+fp-info-cache
+_saved_*.sch
+
+# GCP
+credentials.json
+
+# Various junk
+.DS_Store

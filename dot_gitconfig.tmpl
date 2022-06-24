@@ -1,0 +1,70 @@
+[user]
+	name = Adrien Thebo
+	email = email = {{ .email | quote  }}
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim
+[color]
+	interactive = auto
+	ui = auto
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+	newMoved = cyan
+	oldMoved = blue
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	untracked = cyan
+[diff]
+	mnemonicprefix = true
+[merge]
+	stat = true
+	conflictstyle = diff3
+[push]
+	default = current
+[alias]
+	wdiff = diff --word-diff
+	ci = commit -v
+	st = status --short --branch
+	wat = log -p
+	lg = "log --pretty=format:'%C(yellow)%h%C(reset) %C(blue)%an%C(reset) %C(cyan)%cr%C(reset) %s %C(green)%d%C(reset)' --graph"
+	forward = pull --ff-only
+	redo = commit --amend -C HEAD
+	rebase-master = !git rebase -i $(git merge-base master HEAD)
+	where = rev-parse --abbrev-ref HEAD
+	smash = reset --hard
+	checkout-pull = "!fn() { git fetch origin \"refs/pull/$1/head\" && git checkout -b \"pull-$1\" && git reset --hard FETCH_HEAD ; } ; fn "
+[github]
+	user = adrienthebo
+[gist]
+	browse = yes
+[http]
+	cookiefile = ~/.gitcookies
+# use separate file for username / github token / etc
+[include]
+	path = ~/.gitconfig.local
+[fetch]
+	prune = true
+[url "https://github.com"]
+	insteadOf = git://github.com
+[url "https://github.com/"]
+	insteadOf = gh:
+[url "git@github.com:"]
+	insteadOf = ghs:
+[pager]
+	branch = false
+
+[core]
+  #pager = delta --dark --plus-color="#012800" --minus-color="#340001" --theme="base16-ocean.dark"
+  #pager = delta --dark --plus-color="#012800" --minus-color="#340001" --theme="zenburn"
+
+[interactive]
+  #diffFilter = delta --dark --color-only
