@@ -1,0 +1,66 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/cask-fonts"
+
+# The joy of life
+
+cask "spotify"
+cask "stats"
+
+# Operations
+
+cask "firefox"
+cask "google-chrome"
+cask "enpass"
+
+# Productivity
+
+cask "keepingyouawake"
+cask "obsidian"
+
+brew "task"
+
+## Communications
+
+cask "slack"
+cask "discord"
+cask "signal"
+
+# Development
+
+brew "chezmoi"
+brew "tmux"
+brew "coreutils"
+brew "git"
+brew "pv"
+brew "rdfind"
+
+## Editors
+
+brew "neovim"
+cask "alacritty"
+cask "visual-studio-code"
+
+cask "font-roboto-mono-for-powerline"
+cask "font-roboto-mono-nerd-font"
+
+## Containers
+
+brew "colima"
+brew "docker"
+brew "tealdeer"
+
+## Security
+
+brew "ykman"
+brew "yubico-piv-tool"
+
+## System
+
+# Required for versions of SSH that support SSH resident keys
+brew "openssh"
+
+brew "kopia"
+cask "kopiaui"
+
