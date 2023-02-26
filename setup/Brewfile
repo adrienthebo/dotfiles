@@ -6,20 +6,17 @@ tap "homebrew/cask-fonts"
 # The joy of life
 
 cask "spotify"
-cask "stats"
+cask "steam"
+cask "beardedspice"
 
 # Operations
 
 cask "firefox"
 cask "google-chrome"
 cask "enpass"
-
-# Productivity
-
+cask "stats"
 cask "keepingyouawake"
 cask "obsidian"
-
-brew "task"
 
 ## Communications
 
@@ -35,6 +32,8 @@ brew "coreutils"
 brew "git"
 brew "pv"
 brew "rdfind"
+brew "rsync"
+brew "htop"
 
 ## Editors
 
