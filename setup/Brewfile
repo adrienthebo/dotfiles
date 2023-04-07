@@ -36,6 +36,7 @@ brew "rsync"
 brew "htop"
 brew "jq"
 brew "yq"
+brew "d2"
 
 ## Editors
 
@@ -65,3 +66,4 @@ brew "openssh"
 brew "kopia"
 cask "kopiaui"
 
+cask "zerotier-one"
