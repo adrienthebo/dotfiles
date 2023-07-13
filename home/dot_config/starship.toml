@@ -1,0 +1,8 @@
+[nodejs]
+disabled = true
+
+[kubernetes]
+disabled = false
+
+[package]
+disabled = true
