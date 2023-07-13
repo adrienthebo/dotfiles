@@ -1,0 +1,54 @@
+################################################################################
+# PATH inclusions
+################################################################################
+
+if [[ -d "$HOME/.krew" ]]; then
+    export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
+################################################################################
+# Sourced files
+################################################################################
+
+if [[ -f "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+fi
+
+if [[ -f source "$HOME/.asdf/asdf.sh" ]]; then
+    source "$HOME/.asdf/asdf.sh"
+fi
+
+################################################################################
+# Aliases
+################################################################################
+
+alias k="kubectl"
+alias python="python3"
+
+if command -v lsd 1>&- 2>&-; then
+    alias ls=lsd
+fi
+
+if command -v bat 1>&- 2>&-; then
+    alias cat=bat
+fi
+
+if command -v nvim 1>&- 2>&-; then
+    alias vim=nvim
+fi
+
+################################################################################
+# Shell hooks
+################################################################################
+
+if command -v starship 1>&- 2>&-; then
+    eval "$(starship init zsh)"
+fi
+
+if command -v direnv 1>&- 2>&-; then
+    eval "$(direnv hook zsh)"
+fi
+
+if command -v keychain 1>&- 2>&-; then
+    eval "$(keychain --eval)"
+fi
