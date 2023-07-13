@@ -3,7 +3,6 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/cask-fonts"
 
-
 ################################################################################
 # Desktop
 
@@ -34,14 +33,22 @@ cask "anki"
 cask "slack"
 cask "discord"
 cask "signal"
+cask "zoom"
 
 ################################################################################
 # Development
+
+### Development essentials
+
+brew "cmake"
+brew "libtool"
+brew "pkg-config"
 
 ### CLI
 
 brew "chezmoi"
 brew "tmux"
+brew "direnv"
 brew "coreutils"
 brew "git"
 brew "pv"
@@ -52,6 +59,12 @@ brew "jq"
 brew "yq"
 brew "d2"
 brew "tealdeer"
+brew "ripgrep"
+brew "fzf"
+
+brew "ipcalc"
+brew "task"
+brew "timewarrior"
 
 ### Editors
 
@@ -66,11 +79,16 @@ cask "font-roboto-mono-nerd-font"
 
 brew "colima"
 brew "docker"
+brew "docker-compose"
+brew "kubectl"
+brew "krew"
 
 ### Security
 
 brew "ykman"
 brew "yubico-piv-tool"
+brew "vault"
+brew "keychain"
 
 ### System
 
