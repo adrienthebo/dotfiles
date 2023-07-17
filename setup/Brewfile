@@ -52,6 +52,7 @@ brew "pkg-config"
 brew "coreutils"
 brew "rsync"
 brew "htop"
+brew "dust"
 brew "rdfind"
 brew "fzf"
 
@@ -61,10 +62,14 @@ brew "jq"
 brew "yq"
 brew "ripgrep"
 
-#### Development tools
+#### Terminal infrastructure
 
 brew "chezmoi"
 brew "tmux"
+brew "atuin"
+
+#### Development tools
+
 brew "direnv"
 brew "git"
 brew "d2"
