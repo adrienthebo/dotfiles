@@ -53,8 +53,12 @@ brew "coreutils"
 brew "rsync"
 brew "htop"
 brew "dust"
-brew "rdfind"
+brew "fd"
+brew "bat"
 brew "fzf"
+
+# rdfined: find/deduplicate files
+# brew "rdfind"
 
 #### Text/data processing
 
