@@ -44,29 +44,41 @@ brew "cmake"
 brew "libtool"
 brew "pkg-config"
 
+################################################################################
 ### CLI
+
+#### Core functionality
+
+brew "coreutils"
+brew "rsync"
+brew "htop"
+brew "rdfind"
+brew "fzf"
+
+#### Text/data processing
+
+brew "jq"
+brew "yq"
+brew "ripgrep"
+
+#### Development tools
 
 brew "chezmoi"
 brew "tmux"
 brew "direnv"
-brew "coreutils"
 brew "git"
-brew "pv"
-brew "rdfind"
-brew "rsync"
-brew "htop"
-brew "jq"
-brew "yq"
 brew "d2"
 brew "tealdeer"
-brew "ripgrep"
-brew "fzf"
 
+#### Misc tools
+
+brew "pv"
 brew "ipcalc"
 brew "task"
 brew "timewarrior"
 
-### Editors
+################################################################################
+### Editors and workspaces
 
 brew "neovim"
 cask "alacritty"
@@ -89,6 +101,7 @@ brew "ykman"
 brew "yubico-piv-tool"
 brew "vault"
 brew "keychain"
+brew "gpg2"
 
 ### System
 
