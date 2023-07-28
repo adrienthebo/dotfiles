@@ -1,4 +1,11 @@
 ################################################################################
+# Preamble
+################################################################################
+
+autoload -Uz compinit
+compinit
+
+################################################################################
 # PATH inclusions
 ################################################################################
 
@@ -10,12 +17,10 @@ fi
 # Sourced files
 ################################################################################
 
-if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
-    source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
-fi
 
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
+    plugins=($plugins rust)
 fi
 
 #if [[ -f source "$HOME/.asdf/asdf.sh" ]]; then
@@ -68,4 +73,35 @@ fi
 
 if command -v chezmoi 1>&- 2>&-; then
     eval "$(chezmoi completion zsh)"
+fi
+
+################################################################################
+# oh-my-zsh
+#
+# We configure this late so that other logic can activate more zsh plugins
+################################################################################
+
+potential_plugins=(
+    brew
+    direnv 
+    docker
+    fd
+    fzf
+    git
+    golang
+    man
+    python
+)
+
+
+if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
+    for plugin in "${potential_plugins[@]}"; do
+        if command -v $plugin 1>&- 2>&-; then
+            plugins=($plugins $plugin)
+        fi
+    done
+
+    plugins=($plugins zsh-vi-mode)
+
+    source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 fi

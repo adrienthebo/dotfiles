@@ -6,6 +6,10 @@
     type = "git-repo"
     url = "https://github.com/zsh-users/zsh-syntax-highlighting"
     refreshPeriod = "168h"
+[".oh-my-zsh/custom/plugins/zsh-vi-mode"]
+    type = "git-repo"
+    url = "https://github.com/jeffreytse/zsh-vi-mode"
+    refreshPeriod = "168h"
 [".config/tmux"]
     type = "git-repo"
     url = "https://github.com/gpakosz/.tmux"
