@@ -10,13 +10,17 @@ fi
 # Sourced files
 ################################################################################
 
+if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
+    source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
+fi
+
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
 fi
 
-if [[ -f source "$HOME/.asdf/asdf.sh" ]]; then
-    source "$HOME/.asdf/asdf.sh"
-fi
+#if [[ -f source "$HOME/.asdf/asdf.sh" ]]; then
+#    source "$HOME/.asdf/asdf.sh"
+#fi
 
 ################################################################################
 # Aliases
@@ -51,4 +55,17 @@ fi
 
 if command -v keychain 1>&- 2>&-; then
     eval "$(keychain --eval)"
+fi
+
+if command -v atuin 1>&- 2>&-; then
+    eval "$(atuin init zsh)"
+    eval "$(atuin gen-completions --shell zsh)"
+fi
+
+################################################################################
+# Completions
+################################################################################
+
+if command -v chezmoi 1>&- 2>&-; then
+    eval "$(chezmoi completion zsh)"
 fi
