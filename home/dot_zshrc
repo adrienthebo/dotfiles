@@ -47,6 +47,14 @@ if command -v nvim 1>&- 2>&-; then
 fi
 
 ################################################################################
+# Completions
+################################################################################
+
+if command -v chezmoi 1>&- 2>&-; then
+    eval "$(chezmoi completion zsh)"
+fi
+
+################################################################################
 # Shell hooks
 ################################################################################
 
@@ -63,22 +71,22 @@ if command -v keychain 1>&- 2>&-; then
 fi
 
 if command -v atuin 1>&- 2>&-; then
+    # This is where things start getting weird.
+    #
+    # We have multiple plugins that are fighting over key bindings, and because
+    # life isn't interesting enough they're setting bindings _within the
+    # zsh precmd hooks -- and to be specific this is zsh-vi-mode acting the fool.
+    # This is not a good time because the addition of these hooks is order
+    # dependent; in order for atuin to be properly registered the atuin shell
+    # hooks must be loaded before oh-my-zsh and zsh-vi-mode.
+    #
+    # Shell environments are not my favorite environment.
     eval "$(atuin init zsh)"
     eval "$(atuin gen-completions --shell zsh)"
 fi
 
 ################################################################################
-# Completions
-################################################################################
-
-if command -v chezmoi 1>&- 2>&-; then
-    eval "$(chezmoi completion zsh)"
-fi
-
-################################################################################
 # oh-my-zsh
-#
-# We configure this late so that other logic can activate more zsh plugins
 ################################################################################
 
 potential_plugins=(
@@ -95,6 +103,8 @@ potential_plugins=(
 
 
 if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
+    zstyle ':omz:*' aliases no
+
     for plugin in "${potential_plugins[@]}"; do
         if command -v $plugin 1>&- 2>&-; then
             plugins=($plugins $plugin)
