@@ -46,6 +46,10 @@ if command -v nvim 1>&- 2>&-; then
     alias vim=nvim
 fi
 
+if command -v task 1>&- 2>&-; then
+    alias t=task
+fi
+
 ################################################################################
 # Completions
 ################################################################################
@@ -115,3 +119,12 @@ if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
 
     source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 fi
+
+# Fight me, zsh-vi-mode
+function _atuin_bindkey() {
+    bindkey '^r' _atuin_search_widget
+    bindkey '^[[A' _atuin_up_search_widget
+    bindkey '^[OA' _atuin_up_search_widget
+}
+
+add-zsh-hook precmd _atuin_bindkey
