@@ -1,0 +1,23 @@
+# Taskwarrior UDAs
+
+uda.url.label=URL
+uda.url.type=string
+
+uda.branch.label=Git branch
+uda.branch.type=string
+
+uda.resolution.type=string
+uda.resolution.label=Resolution
+
+uda.priority.label=Priority
+uda.priority.type=string
+uda.priority.values=H,M,L,
+
+urgency.uda.priority.H.coefficient=6.0
+urgency.uda.priority.M.coefficient=3.9
+urgency.uda.priority.L.coefficient=-1.8
+
+uda.bucket.label=Kanban bucket
+uda.bucket.type=string
+uda.bucket.values=Inbox,Backlog,Planned,Next,InProgress,Now
+uda.bucket.default=Inbox
