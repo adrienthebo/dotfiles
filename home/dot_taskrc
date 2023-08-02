@@ -4,7 +4,7 @@
 #   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
 # Use the command 'task show' to see all defaults and overrides
 # Files
-data.location=~/.local/state/taskwarrior/
+data.location=~/.local/state/taskwarrior
 
 include ~/.config/taskwarrior/theme.rc
 include ~/.config/taskwarrior/reports.rc

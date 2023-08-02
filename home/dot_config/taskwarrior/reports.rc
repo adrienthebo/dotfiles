@@ -39,8 +39,8 @@ report.triage.context=0
 report.now.description=What to do, right now
 report.now.filter=(status:pending or status:waiting) (+next or bucket:InProgress or bucket:Next or bucket:Now)
 report.now.sort=bucket-/,project-,urgency-
-report.now.columns=id,tags,entry.age,priority,urgency,project,due.remaining,bucket,description.combined
-report.now.labels=ID,Tags,Age,P,Urg,Project,Due,Bucket,Description
+report.now.columns=id,status.short,tags,entry.age,priority,urgency,project,due.remaining,bucket,description.combined
+report.now.labels=ID,S,Tags,Age,P,Urg,Project,Due,Bucket,Description
 
 report.plan.description=What to do next
 report.plan.filter=(status:pending or status:waiting) (bucket:Next or (bucket:Planned)) limit:10

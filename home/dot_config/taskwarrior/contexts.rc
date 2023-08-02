@@ -1,34 +1,34 @@
 # General workday settings.
 #
 # Show:
-#   * Gitpod related projects
+#   * Lagrange related projects
 #   * High priority issues, regardless of project
 #   * Overdue tasks
 #   * Tasks due in the next two hours
 # Don't show:
 #   * Anything tagged private
-context.Workday.read=(project:Gitpod or priority:H or +OVERDUE or (due.after:now due.before:now+2hr)) -Private
-context.Workday.write=project:Gitpod
+context.Workday.read=(project:Lagrange or priority:H or +OVERDUE or (due.after:now due.before:now+2hr)) -Private
+context.Workday.write=project:Lagrange
 
-# Gitpod only.
+# Lagrange only.
 #
 # Show:
-#   * Gitpod related projects
+#   * Lagrange related projects
 # Don't show:
 #   * Anything tagged private
-context.Gitpod.read=(project:Gitpod) -Private
-context.Gitpod.write=project:Gitpod
+context.Lagrange.read=(project:Lagrange) -Private
+context.Lagrange.write=project:Lagrange
 
 # Personal only.
-context.Personal.read=(project.not:Lagrange project.not:Gitpod) or priority:H or +OVERDUE
+context.Personal.read=(project.not:Lagrange project.not:Lagrange) or priority:H or +OVERDUE
 context.Personal.write=project:Personal
 
 # SHIFT only.
 context.SHIFT.read=(project:SHIFT) or priority:H or +OVERDUE
 context.SHIFT.write=project:SHIFT
 
-context.RampUp.read=project:Gitpod +RampUp
-context.RampUp.write=project:Gitpod
+context.RampUp.read=project:Lagrange +RampUp
+context.RampUp.write=project:Lagrange
 
-context.RampDown.read=project:Gitpod +RampDown
-context.RampDown.write=project:Gitpod
+context.RampDown.read=project:Lagrange +RampDown
+context.RampDown.write=project:Lagrange
