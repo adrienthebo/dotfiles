@@ -100,8 +100,8 @@ report.recent.labels=ID,Status,Project,Created,Modified,Description
 report.open.description=All open tasks
 report.open.sort=project+\/,entry-
 report.open.filter=status.not:completed status.not:deleted status.not:recurring
-report.open.labels=ID,Project,Status,D,Wait,S,Due,Until,P,Entry,Urgency,Description
-report.open.columns=id,project,status.short,depends,wait.relative,scheduled.relative,due.remaining,until.remaining,priority,entry,urgency,description.count
+report.open.labels=ID,Project,Status,D,Wait,S,Due,Until,P,Entry,Bucket,Urgency,Description
+report.open.columns=id,project,status.short,depends,wait.relative,scheduled.relative,due.remaining,until.remaining,priority,entry,bucket,urgency,description.count
 
 report.yaks.description=Domesticated Himalayan Long Haired Cattle
 report.yaks.filter=(entry.after:now-1w or end.after:now-1w) +Yaks
