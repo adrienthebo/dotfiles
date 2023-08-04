@@ -79,6 +79,12 @@ brew "direnv"
 brew "git"
 brew "d2"
 brew "tealdeer"
+brew "watchexec"
+brew "pre-commit"
+
+##### Language tools
+
+brew "shellcheck"
 
 #### Misc tools
 
