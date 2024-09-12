@@ -1,0 +1,6 @@
+. "$HOME/.cargo/env"
+
+if command -v keychain 1>/dev/null 2>/dev/null; then
+  eval "$(keychain --eval)"
+fi
+
