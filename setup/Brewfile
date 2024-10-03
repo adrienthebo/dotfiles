@@ -1,44 +1,75 @@
 tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
 tap "homebrew/cask-fonts"
 
 ################################################################################
 # Desktop
+################################################################################
 
-### Media
+########################################
+## Services
+########################################
 
-cask "spotify"
-cask "steam"
-cask "beardedspice"
-
-### Web
-
-cask "firefox"
-cask "google-chrome"
+#cask "meetingbar"
 cask "stats"
-
-### Services
-
+cask "betterdisplay"
 cask "enpass"
 cask "keepingyouawake"
 
-# Productivity
+########################################
+## Desktop applications
+########################################
+
+####################
+### Web
+####################
+
+cask "firefox"
+cask "google-chrome"
+cask "tor-browser"
+
+####################
+### Productivity
+####################
 
 cask "obsidian"
 cask "anki"
+cask "qgis"
+cask "prusaslicer"
 
+####################
 ## Communications
+####################
 
 cask "slack"
 cask "discord"
 cask "signal"
 cask "zoom"
 
+########################################
+## Media
+########################################
+
+####################
+### Audio
+####################
+
+cask "spotify"
+cask "beardedspice"
+
+####################
+### Books
+####################
+
+cask "kindle"
+cask "calibre"
+
 ################################################################################
 # Development
+################################################################################
 
-### Development essentials
+####################
+### Development libraries
+####################
 
 brew "cmake"
 brew "libtool"
@@ -46,8 +77,11 @@ brew "pkg-config"
 
 ################################################################################
 ### CLI
+################################################################################
 
-#### Core functionality
+####################
+### Core CLI tools
+####################
 
 brew "coreutils"
 brew "rsync"
@@ -58,20 +92,22 @@ brew "bat"
 brew "fzf"
 brew "watch"
 
-# rdfined: find/deduplicate files
-# brew "rdfind"
+####################
+### Terminal infrastructure
+####################
 
-#### Text/data processing
+brew "chezmoi"
+brew "tmux"
+brew "atuin"
+
+####################
+### Text/data processing
+####################
 
 brew "jq"
 brew "yq"
 brew "ripgrep"
 
-#### Terminal infrastructure
-
-brew "chezmoi"
-brew "tmux"
-brew "atuin"
 
 #### Development tools
 
@@ -85,6 +121,7 @@ brew "pre-commit"
 ##### Language tools
 
 brew "shellcheck"
+brew "yamllint"
 
 #### Misc tools
 
@@ -95,15 +132,22 @@ brew "timewarrior"
 
 ################################################################################
 ### Editors and workspaces
+################################################################################
 
 brew "neovim"
 cask "alacritty"
 cask "visual-studio-code"
 
+####################
+### Fonts
+####################
+
 cask "font-roboto-mono-for-powerline"
 cask "font-roboto-mono-nerd-font"
 
+####################
 ### Containers
+####################
 
 brew "colima"
 brew "docker"
@@ -113,18 +157,25 @@ brew "krew"
 brew "helm"
 brew "kustomize"
 
+####################
 ### Security
+####################
 
 brew "ykman"
 brew "yubico-piv-tool"
 brew "vault"
 brew "keychain"
 brew "gpg2"
+brew "vault"
 
+####################
 ### System
+####################
 
 # Required for versions of SSH that support SSH resident keys
 brew "openssh"
+
+### Backups
 
 brew "kopia"
 cask "kopiaui"
@@ -132,3 +183,6 @@ cask "kopiaui"
 ### Network
 
 cask "zerotier-one"
+brew "nmap"
+brew "wireguard-go"
+brew "wireguard-tools"
