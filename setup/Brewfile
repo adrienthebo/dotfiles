@@ -35,6 +35,7 @@ cask "obsidian"
 cask "anki"
 cask "qgis"
 cask "prusaslicer"
+cask "todoist"
 
 ####################
 ## Communications
@@ -48,6 +49,12 @@ cask "zoom"
 ########################################
 ## Media
 ########################################
+
+####################
+### Entertainment
+####################
+
+cask "steam"
 
 ####################
 ### Audio
@@ -152,10 +159,18 @@ cask "font-roboto-mono-nerd-font"
 brew "colima"
 brew "docker"
 brew "docker-compose"
+brew "docker-buildx"
+
+
 brew "kubectl"
 brew "krew"
+
 brew "helm"
 brew "kustomize"
+brew "flux"
+
+brew "docker-ls"
+brew "cdebug"
 
 ####################
 ### Security
