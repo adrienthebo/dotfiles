@@ -1,0 +1,7 @@
+Include {{ .chezmoi.config.destDir }}/.colima/ssh_config
+
+Host *
+    ControlMaster auto
+    ControlPath ~/.ssh/S.%r@%h:%p
+    ControlPersist 5m
+
