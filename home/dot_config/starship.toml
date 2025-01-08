@@ -101,3 +101,6 @@ format = "[🐋 $context](blue bold) "
 [directory]
 truncate_to_repo = false
 truncation_symbol = "…/"
+
+[gcloud]
+disabled = true
