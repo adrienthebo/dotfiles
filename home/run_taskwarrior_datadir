@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-mkdir -p "$HOME/.local/state/taskwarrior"
-
-if [[ -f $HOME/.task/backlog.data ]]; then
-    mv $HOME/.task/*.data "$HOME/.local/state/taskwarrior"
-fi
