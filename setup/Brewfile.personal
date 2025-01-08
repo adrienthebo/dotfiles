@@ -1,0 +1,64 @@
+
+cask "enpass"
+
+####################
+### Web
+####################
+
+cask "google-chrome"
+# cask "firefox"
+# cask "tor-browser"
+
+cask "anki"
+cask "qgis"
+cask "prusaslicer"
+
+cask "todoist"
+brew "task"
+brew "timewarrior"
+
+
+####################
+## Communications
+####################
+
+cask "slack"
+cask "zoom"
+cask "discord"
+cask "signal"
+
+########################################
+## Media
+########################################
+
+####################
+### Entertainment
+####################
+
+cask "steam"
+
+####################
+### Audio
+####################
+
+cask "spotify"
+cask "beardedspice"
+
+####################
+### Books
+####################
+
+cask "kindle"
+cask "calibre"
+
+### Backups
+
+brew "kopia"
+cask "kopiaui"
+
+### Network
+
+cask "zerotier-one"
+brew "nmap"
+brew "wireguard-go"
+brew "wireguard-tools"

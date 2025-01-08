@@ -1,5 +1,4 @@
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
 
 ################################################################################
 # Desktop
@@ -12,63 +11,20 @@ tap "homebrew/cask-fonts"
 #cask "meetingbar"
 cask "stats"
 cask "betterdisplay"
-cask "enpass"
-cask "keepingyouawake"
+#cask "keepingyouawake"
+# TODO: amphetamine?
 
 ########################################
 ## Desktop applications
 ########################################
 
-####################
-### Web
-####################
-
-cask "firefox"
-cask "google-chrome"
-cask "tor-browser"
 
 ####################
 ### Productivity
 ####################
 
 cask "obsidian"
-cask "anki"
-cask "qgis"
-cask "prusaslicer"
-cask "todoist"
 
-####################
-## Communications
-####################
-
-cask "slack"
-cask "discord"
-cask "signal"
-cask "zoom"
-
-########################################
-## Media
-########################################
-
-####################
-### Entertainment
-####################
-
-cask "steam"
-
-####################
-### Audio
-####################
-
-cask "spotify"
-cask "beardedspice"
-
-####################
-### Books
-####################
-
-cask "kindle"
-cask "calibre"
 
 ################################################################################
 # Development
@@ -106,6 +62,7 @@ brew "watch"
 brew "chezmoi"
 brew "tmux"
 brew "atuin"
+brew "starship"
 
 ####################
 ### Text/data processing
@@ -114,7 +71,6 @@ brew "atuin"
 brew "jq"
 brew "yq"
 brew "ripgrep"
-
 
 #### Development tools
 
@@ -134,8 +90,6 @@ brew "yamllint"
 
 brew "pv"
 brew "ipcalc"
-brew "task"
-brew "timewarrior"
 
 ################################################################################
 ### Editors and workspaces
@@ -149,7 +103,7 @@ cask "visual-studio-code"
 ### Fonts
 ####################
 
-cask "font-roboto-mono-for-powerline"
+#cask "font-roboto-mono-for-powerline"
 cask "font-roboto-mono-nerd-font"
 
 ####################
@@ -178,10 +132,7 @@ brew "cdebug"
 
 brew "ykman"
 brew "yubico-piv-tool"
-brew "vault"
 brew "keychain"
-brew "gpg2"
-brew "vault"
 
 ####################
 ### System
@@ -189,15 +140,3 @@ brew "vault"
 
 # Required for versions of SSH that support SSH resident keys
 brew "openssh"
-
-### Backups
-
-brew "kopia"
-cask "kopiaui"
-
-### Network
-
-cask "zerotier-one"
-brew "nmap"
-brew "wireguard-go"
-brew "wireguard-tools"
