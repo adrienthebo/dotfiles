@@ -32,29 +32,29 @@ fi
 ################################################################################
 
 alias k="kubectl"
-alias python="python3"
 
-if command -v lsd 1>&- 2>&-; then
+if command -v lsd 1>/dev/null 2>&-; then
     alias ls=lsd
 fi
 
-if command -v bat 1>&- 2>&-; then
+if command -v bat 1>/dev/null 2>&1; then
     alias cat=bat
 fi
 
-if command -v nvim 1>&- 2>&-; then
+if command -v nvim 1>/dev/null 2>&1; then
     alias vim=nvim
 fi
 
-if command -v task 1>&- 2>&-; then
+if command -v task 1>/dev/null 2>&1; then
     alias t=task
 fi
 
+alias ssh-stop="ssh -O stop"
 ################################################################################
 # Completions
 ################################################################################
 
-if command -v chezmoi 1>&- 2>&-; then
+if command -v chezmoi 1>/dev/null 2>&1; then
     eval "$(chezmoi completion zsh)"
 fi
 
@@ -62,19 +62,19 @@ fi
 # Shell hooks
 ################################################################################
 
-if command -v starship 1>&- 2>&-; then
+if command -v starship 1>/dev/null 2>&1; then
     eval "$(starship init zsh)"
 fi
 
-if command -v direnv 1>&- 2>&-; then
+if command -v direnv 1>/dev/null 2>&1; then
     eval "$(direnv hook zsh)"
 fi
 
-if command -v keychain 1>&- 2>&-; then
+if command -v keychain 1>/dev/null 2>&1; then
     eval "$(keychain --eval)"
 fi
 
-if command -v atuin 1>&- 2>&-; then
+if command -v atuin 1>/dev/null 2>&1; then
     # This is where things start getting weird.
     #
     # We have multiple plugins that are fighting over key bindings, and because
@@ -103,6 +103,8 @@ potential_plugins=(
     golang
     man
     python
+    kubectl
+    gcloud
 )
 
 
@@ -110,12 +112,12 @@ if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
     zstyle ':omz:*' aliases no
 
     for plugin in "${potential_plugins[@]}"; do
-        if command -v $plugin 1>&- 2>&-; then
+        if command -v $plugin 1>/dev/null 2>&1; then
             plugins=($plugins $plugin)
         fi
     done
 
-    plugins=($plugins zsh-vi-mode)
+    plugins=($plugins zsh-vi-mode fluxcd)
 
     source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 fi
@@ -128,3 +130,12 @@ function _atuin_bindkey() {
 }
 
 add-zsh-hook precmd _atuin_bindkey
+export PATH="/opt/homebrew/opt/opencv@3/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/adrienthebo/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
