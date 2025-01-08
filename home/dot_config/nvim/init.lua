@@ -15,4 +15,8 @@ vim.g.mapleader = "\\" -- Make sure to set `mapleader` before lazy so your mappi
 
 require("lazy").setup({
   "preservim/nerdtree",
+  "tpope/vim-surround",
+  "junegunn/fzf.vim",
+  "junegunn/fzf",
+  "tpope/vim-eunuch",
 })
