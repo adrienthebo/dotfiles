@@ -101,7 +101,6 @@ potential_plugins=(
     brew
     direnv 
     docker
-    fd
     fzf
     git
     golang
