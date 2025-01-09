@@ -133,7 +133,7 @@ add-zsh-hook precmd _atuin_bindkey
 export PATH="/opt/homebrew/opt/opencv@3/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/adrienthebo/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
