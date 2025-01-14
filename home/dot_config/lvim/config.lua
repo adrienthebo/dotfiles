@@ -67,7 +67,15 @@ lvim.plugins = {
       non_standalone = true,
       -- configuration goes here
     },
-  }
+  },
+  {
+    "f-person/git-blame.nvim",
+    event = "BufRead",
+    config = function()
+      vim.cmd "highlight default link gitblame SpecialComment"
+      require("gitblame").setup { enabled = false }
+    end,
+  },
 }
 
 -- https://github.com/LunarVim/LunarVim/discussions/3940
