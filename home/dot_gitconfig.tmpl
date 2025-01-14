@@ -1,6 +1,6 @@
 [user]
 	name = Adrien Thebo
-	email = {{ .email | quote  }}
+	email = {{ .git.email | quote  }}
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
@@ -65,8 +65,23 @@
 [core]
   #pager = delta --dark --plus-color="#012800" --minus-color="#340001" --theme="base16-ocean.dark"
   #pager = delta --dark --plus-color="#012800" --minus-color="#340001" --theme="zenburn"
-
 [interactive]
   #diffFilter = delta --dark --color-only
 [init]
   defaultBranch = main
+[rebase]
+  updateRefs = true
+{{ with .git.features.credential_manager -}}
+[credential]
+  helper =
+  helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+  useHttpPath = true
+{{ end -}}
+{{ with .git.features.lfs -}}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+{{ end -}}
