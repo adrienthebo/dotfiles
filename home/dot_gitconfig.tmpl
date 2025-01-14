@@ -4,6 +4,9 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
+{{- with .git.features.delta }}
+  pager = delta --syntax-theme="1337"
+{{ end -}}
 [color]
 	interactive = auto
 	ui = auto
@@ -62,11 +65,10 @@
 [pager]
 	branch = false
 
-[core]
-  #pager = delta --dark --plus-color="#012800" --minus-color="#340001" --theme="base16-ocean.dark"
-  #pager = delta --dark --plus-color="#012800" --minus-color="#340001" --theme="zenburn"
 [interactive]
-  #diffFilter = delta --dark --color-only
+{{- with .git.features.delta }}
+  diffFilter = delta --dark --color-only
+{{ end -}}
 [init]
   defaultBranch = main
 [rebase]
