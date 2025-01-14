@@ -3,6 +3,9 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
+lvim.builtin.telescope.defaults.path_display = { "filename_first" }
+lvim.builtin.telescope.defaults.sorting_strategy = "ascending"
+
 lvim.keys.normal_mode["gt"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["gT"] = ":BufferLineCyclePrev<CR>"
 
