@@ -113,10 +113,15 @@ lspconfig.helm_ls.setup {
   }
 }
 
+-- lspconfig.lua_ls.setup{}
+lspconfig.lua_ls.setup {}
 
 -- setup yamlls
 lspconfig.yamlls.setup {}
 
+lspconfig.tsserver.setup {}
+
+lspconfig.golangci_lint_ls.setup {}
 
 -- below are keymapping as recommended by nvim-lspconfig
 
