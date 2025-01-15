@@ -84,13 +84,16 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- default is ""
 vim.opt.foldenable = false -- if this option is true and fold method option is other than normal, every time a document is opened everything will be folded.
 
 --------------------------------------------------------------------------------
--- Language server configuration
+-- Language features
 --------------------------------------------------------------------------------
+
+----------------------------------------
+-- Language servers
+----------------------------------------
 
 local lspconfig = require("lspconfig")
 
 -- pyright
-
 lspconfig.pyright.before_init = function(params, config)
   local Path = require "plenary.path"
   local venv = Path:new((config.root_dir:gsub("/", Path.path.sep)), ".venv")
@@ -101,8 +104,9 @@ lspconfig.pyright.before_init = function(params, config)
   end
 end
 
--- helm-ls configuration
 
+
+-- helm-ls configuration
 lspconfig.helm_ls.setup {
   settings = {
     ['helm-ls'] = {
@@ -122,6 +126,23 @@ lspconfig.yamlls.setup {}
 lspconfig.tsserver.setup {}
 
 lspconfig.golangci_lint_ls.setup {}
+
+----------------------------------------
+-- Linters
+----------------------------------------
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { name = "flake8" },
+  {
+    name = "shellcheck",
+    args = { "--severity", "warning" },
+  },
+}
+
+--------------------------------------------------------------------------------
+-- Bindings
+--------------------------------------------------------------------------------
 
 -- below are keymapping as recommended by nvim-lspconfig
 
