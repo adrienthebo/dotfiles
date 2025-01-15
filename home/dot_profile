@@ -1,14 +1,16 @@
-pathmunge () {
-  if [[ -e $1 ]]; then
-    if ! echo "$PATH" | grep -Eq "(^|:)$1($|:)" ; then
-      if [[ "$2" = "after" ]] ; then
-        PATH=$PATH:$1
-      else
-        PATH=$1:$PATH
+if ! type pathmunge 1>/dev/null 2>/dev/null; then
+  pathmunge () {
+    if [[ -e $1 ]]; then
+      if ! echo "$PATH" | grep -Eq "(^|:)$1($|:)" ; then
+        if [[ "$2" = "after" ]] ; then
+          PATH=$PATH:$1
+        else
+          PATH=$1:$PATH
+        fi
       fi
     fi
-  fi
-}
+  }
+fi
 
 if [[ -f "$HOME/.cargo/env" ]]; then
   source "$HOME/.cargo/env"
@@ -19,4 +21,3 @@ pathmunge "/opt/homebrew/bin"
 if command -v keychain 1>/dev/null 2>/dev/null; then
   eval "$(keychain --eval)"
 fi
-
