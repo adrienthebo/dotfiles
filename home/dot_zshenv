@@ -17,3 +17,7 @@ if [[ -f "$HOME/.cargo/env" ]]; then
 fi
 
 pathmunge "$HOME/.local/bin"
+
+if [[ -f "$HOME/.zshenv.local" ]]; then
+  source "$HOME/.zshenv.local"
+fi
