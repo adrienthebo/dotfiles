@@ -5,6 +5,18 @@
 autoload -Uz compinit
 compinit
 
+function pathmunge() {
+  if [[ -e $1 ]]; then
+    if ! [[ "$PATH" = *"$1"* ]]; then
+      if [ "$2" = "after" ] ; then
+        export PATH=$PATH:$1
+      else
+        export PATH=$1:$PATH
+      fi
+    fi
+  fi
+}
+
 ################################################################################
 # PATH inclusions
 ################################################################################
@@ -105,9 +117,11 @@ fi
 ################################################################################
 
 potential_plugins=(
+    aws
     brew
     direnv 
     docker
+    docker-compose
     fzf
     git
     golang
@@ -116,6 +130,8 @@ potential_plugins=(
     kubectl
     gcloud
 )
+
+SHOW_AWS_PROMPT=false
 
 
 if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
