@@ -38,3 +38,6 @@ credentials.json
 
 # Various junk
 .DS_Store
+
+# Mise - ignore when in subdirectory
+/.config/mise.toml
