@@ -59,7 +59,7 @@ if command -v chezmoi 1>/dev/null 2>&1; then
 fi
 
 ################################################################################
-# Shell hooks
+# Shell hooks and services
 ################################################################################
 
 if command -v starship 1>/dev/null 2>&1; then
@@ -68,10 +68,6 @@ fi
 
 if command -v direnv 1>/dev/null 2>&1; then
     eval "$(direnv hook zsh)"
-fi
-
-if command -v keychain 1>/dev/null 2>&1; then
-    eval "$(keychain --eval)"
 fi
 
 if command -v atuin 1>/dev/null 2>&1; then
@@ -91,6 +87,17 @@ fi
 
 if command -v mise 1>/dev/null 2>/dev/null; then
   eval "$(mise activate)"
+fi
+
+# Keychain loading is also performed in ~/.profile; it's performed here as well
+# to ensure we're consistently using the homebrew ssh-agent.
+if command -v keychain 1>/dev/null 2>/dev/null && [[ -z $HAS_KEYCHAIN ]]; then
+  eval "$(keychain --eval)"
+  export __HAS_KEYCHAIN=true
+fi
+
+if command -v zoxide 1>/dev/null 2>&1; then
+  eval "$(zoxide init zsh --cmd=cd)"
 fi
 
 ################################################################################
