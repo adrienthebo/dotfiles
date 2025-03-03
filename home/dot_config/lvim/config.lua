@@ -126,6 +126,9 @@ lspconfig.yamlls.setup {}
 lspconfig.tsserver.setup {}
 
 lspconfig.golangci_lint_ls.setup {}
+lspconfig.gopls.setup {}
+
+lspconfig.rust_analyzer.setup {}
 
 ----------------------------------------
 -- Linters
@@ -139,6 +142,10 @@ linters.setup {
     args = { "--severity", "warning" },
   },
 }
+
+----------------------------------------
+-- Linters
+----------------------------------------
 
 --------------------------------------------------------------------------------
 -- Bindings
