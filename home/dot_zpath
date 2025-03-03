@@ -1,5 +1,28 @@
 # .zpath
 
+function pathmunge() {
+  if [[ -e $1 ]]; then
+    if ! [[ "$PATH" = *"$1"* ]]; then
+      if [ "$2" = "after" ] ; then
+        export PATH=$PATH:$1
+      else
+        export PATH=$1:$PATH
+      fi
+    fi
+  fi
+}
+
+# TODO: kill this
 if [[ -d "${HOME}/go/bin" ]]; then
   export PATH="${PATH}:${HOME}/go/bin"
+fi
+
+if [[ -f "$HOME/.cargo/env" ]]; then
+  source "$HOME/.cargo/env"
+fi
+
+pathmunge "$HOME/.local/bin"
+
+if [[ -f "$HOME/.zshenv.local" ]]; then
+  source "$HOME/.zshenv.local" 
 fi

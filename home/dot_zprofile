@@ -13,5 +13,3 @@ if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
 fi
 
 export SSH_AUTH_SOCK="$HOME/.ssh/agent"
-
-export PATH="$PATH:$HOME/.cargo/bin"
