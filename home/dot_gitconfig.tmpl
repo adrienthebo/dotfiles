@@ -1,6 +1,8 @@
 [user]
 	name = Adrien Thebo
 	email = {{ .git.email | quote  }}
+[commit]
+  verbose = true
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
@@ -26,22 +28,32 @@
 [color "status"]
 	added = yellow
 	untracked = cyan
+[branch]
+  sort = -committerdate
 [diff]
-	mnemonicprefix = true
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 [merge]
 	stat = true
 	conflictstyle = diff3
 [push]
 	default = current
+  autoSetupRemote = true
+  followTags = true
 [alias]
+  out = "log @{u}.."
 	wdiff = diff --word-diff
 	ci = commit -v
 	st = status --short --branch
 	wat = log -p
 	lg = "log --pretty=format:'%C(yellow)%h%C(reset) %C(blue)%an%C(reset) %C(cyan)%cr%C(reset) %s %C(green)%d%C(reset)' --graph"
 	forward = pull --ff-only
+  forward-main = !git checkout main && git pull --ff-only
 	redo = commit --amend -C HEAD
-	rebase-master = !git rebase -i $(git merge-base master HEAD)
+	rebase-main = !git rebase -i $(git merge-base main HEAD)
+	rebase-upstream = !git fetch origin && git rebase -i --onto origin/main $(git merge-base main HEAD)
 	where = rev-parse --abbrev-ref HEAD
 	smash = reset --hard
 	checkout-pull = "!fn() { git fetch origin \"refs/pull/$1/head\" && git checkout -b \"pull-$1\" && git reset --hard FETCH_HEAD ; } ; fn "
@@ -55,7 +67,9 @@
 [include]
 	path = ~/.gitconfig.local
 [fetch]
-	prune = true
+  prune = true
+  pruneTags = true
+  all = true
 [url "https://github.com"]
 	insteadOf = git://github.com
 [url "https://github.com/"]
@@ -72,10 +86,14 @@
 [init]
   defaultBranch = main
 [rebase]
+  autoSquash = true
+  autoStash = true
   updateRefs = true
+[rerere]
+  enabled = true
+  autoupdate = true
 {{ with .git.features.credential_manager -}}
 [credential]
-  helper =
   helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
   useHttpPath = true
