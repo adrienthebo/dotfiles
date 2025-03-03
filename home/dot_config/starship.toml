@@ -1,3 +1,5 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 # Which is equivalent to
 format = """
 $username\
@@ -104,3 +106,6 @@ truncation_symbol = "…/"
 
 [gcloud]
 disabled = true
+
+[aws]
+symbol = '🅰 '
