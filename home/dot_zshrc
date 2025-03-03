@@ -156,7 +156,6 @@ function _atuin_bindkey() {
 }
 
 add-zsh-hook precmd _atuin_bindkey
-export PATH="/opt/homebrew/opt/opencv@3/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -165,3 +164,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+if [[ -f "$HOME/.zshrc.local" ]];then
+  source "$HOME/.zshrc.local"
+fi
