@@ -1,7 +1,7 @@
-
 [bell]
 animation = "EaseOutExpo"
 duration = 0
+#color = "#000000"
 
 [colors]
 draw_bold_text_with_bright_colors = true
@@ -69,18 +69,21 @@ style = "Regular"
 x = 0
 y = 0
 
-
 [[mouse.bindings]]
 action = "PasteSelection"
 mouse = "Middle"
+
+[scrolling]
+multiplier = 1
 
 [selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
-decorations = "full"
+decorations = "transparent"
 dynamic_title = true
-opacity = 1.0
+opacity = 0.85
+blur = true
 
 [window.dimensions]
 columns = 120
