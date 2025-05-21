@@ -65,7 +65,9 @@
 
 ## which style to use
 ## possible values: auto, full, compact
-style = "full"
+#style = "full"
+style = "compact"
+inline_height = 20
 
 ## the maximum number of lines the interface should take up
 ## set it to 0 to always go full screen
@@ -265,3 +267,4 @@ records = true
 ## The "workspace" mode is skipped when not in a workspace or workspaces = false.
 ## Default filter mode can be overridden with the filter_mode setting.
 # filters = [ "global", "host", "session", "workspace", "directory" ]
+
