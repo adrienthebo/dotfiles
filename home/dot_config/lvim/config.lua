@@ -129,6 +129,7 @@ lspconfig.golangci_lint_ls.setup {}
 lspconfig.gopls.setup {}
 
 lspconfig.rust_analyzer.setup {}
+lspconfig.denols.setup {}
 
 ----------------------------------------
 -- Linters
