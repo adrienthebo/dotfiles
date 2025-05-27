@@ -1,0 +1,84 @@
+################################################################################
+# Skip noisy services
+################################################################################
+
+regexp=port-forwarder-1.*Handling connection for \d+
+skip=yes
+-
+regexp=^otel-collector-1
+skip=yes
+-
+regexp=^ipblock-init-1
+skip=yes
+-
+
+################################################################################
+# Libraries
+################################################################################
+
+regexp=Datadog Tracer v1.66.0
+skip=yes
+-
+regexp=DATADOG TRACER CONFIGURATION
+skip=yes
+-
+regexp=\d+\.\d+\.\d+\.\d+(:\d+)?
+colours=green
+count=more
+-
+# JSON/error
+regexp="level":\s?"error"
+colours=red
+count=once
+-
+# JSON/warn
+regexp="level":\s?"warn(ing)?"
+colours=yellow
+count=once
+-
+# JSON/info
+regexp="level":\s?"info"
+colours=yellow
+count=once
+-
+# JSON/debug
+regexp="level":\s?"debug"
+colours=white bold
+count=once
+-
+# plain/error
+regexp=(?i)(level=error|\s{2,}error\s{2,})
+color=red
+count=once
+-
+# plain/warn
+regexp=(?i)(level=warn(ing)?|\s+warn(ing)?\+)
+color=yellow
+count=once
+-
+# plain/info
+regexp=(?i)(level=info|\s+info\s+)
+color=cyan
+count=once
+-
+# lua/error
+regexp=\[error\]
+color=red
+count=once
+-
+-
+# lua/warn
+regexp=\[warn(ing)?\]
+color=yellow
+count=once
+-
+# lua/notice
+regexp=\[notice\]
+color=blue
+count=once
+-
+# lua/info
+regexp=\[info\]
+color=cyan
+count=once
+-
