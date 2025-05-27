@@ -5,11 +5,36 @@
 regexp=port-forwarder-1.*Handling connection for \d+
 skip=yes
 -
-regexp=^otel-collector-1
+regexp=^(otel-collector|ipblock-init|jaeger|grafana|prometheus)
 skip=yes
 -
-regexp=^ipblock-init-1
-skip=yes
+
+################################################################################
+# Colorize service names
+################################################################################
+
+# now-proxy
+regexp=^https-terminator-\d+
+colours="\033[38;2;38;219;0m"
+count=once
+-
+
+# now-proxy
+regexp=^now-proxy-\d+
+colours="\033[38;2;10;107;0m"
+count=once
+-
+
+# metadata
+regexp=^metadata-\d+
+colours="\033[38;2;255;231;36m"
+count=once
+-
+
+# metadata
+regexp=^certificates-\d+
+colours="\033[38;2;234;163;0m"
+count=once
 -
 
 ################################################################################
@@ -22,10 +47,25 @@ skip=yes
 regexp=DATADOG TRACER CONFIGURATION
 skip=yes
 -
+
+################################################################################
+# Common patterns
+################################################################################
+
+# IP address/port
 regexp=\d+\.\d+\.\d+\.\d+(:\d+)?
 colours=green
 count=more
 -
+
+################################################################################
+# Log levels
+################################################################################
+
+########################################
+# JSON
+########################################
+
 # JSON/error
 regexp="level":\s?"error"
 colours=red
@@ -46,6 +86,11 @@ regexp="level":\s?"debug"
 colours=white bold
 count=once
 -
+
+########################################
+# plaintext
+########################################
+
 # plain/error
 regexp=(?i)(level=error|\s{2,}error\s{2,})
 color=red
@@ -61,6 +106,11 @@ regexp=(?i)(level=info|\s+info\s+)
 color=cyan
 count=once
 -
+
+########################################
+# lua
+########################################
+
 # lua/error
 regexp=\[error\]
 color=red
