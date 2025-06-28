@@ -23,7 +23,7 @@ pathmunge "/opt/homebrew/bin"
 # Note that on Mac (which is the mainly relevant platform) something like
 # `launchctl setenv` may be what's needed to get the SSH agent loaded
 # into processes like Obsidian.
-if command -v keychain 1>/dev/null 2>/dev/null && [[ -z $HAS_KEYCHAIN ]]; then
+if command -v keychain 1>/dev/null 2>/dev/null && [[ -z $__HAS_KEYCHAIN ]]; then
   eval "$(keychain --eval)"
   export __HAS_KEYCHAIN=true
 fi
