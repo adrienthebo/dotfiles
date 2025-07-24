@@ -114,7 +114,7 @@ fi
 # Keychain loading is also performed in ~/.profile; it's performed here as well
 # to ensure we're consistently using the homebrew ssh-agent.
 if command -v keychain 1>/dev/null 2>/dev/null && [[ -z $__HAS_KEYCHAIN ]]; then
-  eval "$(keychain --eval)"
+  eval "$(keychain --eval --quiet)"
   export __HAS_KEYCHAIN=true
 fi
 
