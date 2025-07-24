@@ -184,3 +184,43 @@ esac
 if [[ -f "$HOME/.zshrc.local" ]];then
   source "$HOME/.zshrc.local"
 fi
+
+function asn() {
+  if [[ -n $1 ]]; then
+    n=$1
+    shift
+    curl -s "https://api.bgpview.io/asn/$n" $@ | jq 
+  else
+    echo "Usage: asn <ASN>"
+  fi
+}
+
+function asnix() {
+  if [[ -n $1 ]]; then
+    n=$1
+    shift
+    curl -s "https://api.bgpview.io/asn/$n/ixs" $@ | jq 
+  else
+    echo "Usage: asn <ASN>"
+  fi
+}
+
+function asnpeers() {
+  if [[ -n $1 ]]; then
+    n=$1
+    shift
+    curl -s "https://api.bgpview.io/asn/$n/peers" $@ | jq 
+  else
+    echo "Usage: asn <ASN>"
+  fi
+}
+
+function whoisip() {
+  if [[ -n $1 ]]; then
+    n=$1
+    shift
+    whois -h whois.cymru.com "$n"
+  else
+    echo "Usage: whoisip <ASN>"
+  fi
+}
