@@ -70,6 +70,12 @@ alias ssh-stop="ssh -O stop"
 ################################################################################
 if [[ $TERM_PROGRAM = vscode ]]; then
   export EDITOR="code --wait"
+elif command -v lvim 1>/dev/null 2>&1; then
+  export EDITOR="lvim"
+elif command -v nvim 1>/dev/null 2>&1; then
+  export EDITOR="nvim"
+else
+  export EDITOR="vim"
 fi
 
 ################################################################################
