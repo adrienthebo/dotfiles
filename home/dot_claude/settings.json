@@ -1,0 +1,32 @@
+{
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:nextjs.org)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm format:*)",
+      "Bash(pnpm lint:*)",
+      "WebFetch(domain:biomejs.dev)",
+      "WebFetch(domain:reactflow.dev)",
+      "WebFetch(domain:www.radix-ui.com)"
+    ],
+    "deny": []
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1754066387913
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/deno run --allow-run jsr:@wyattjoh/claude-code-notification@0.1.2"
+          }
+        ]
+      }
+    ]
+  },
+  "model": "opus"
+}
