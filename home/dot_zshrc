@@ -117,16 +117,21 @@ if command -v mise 1>/dev/null 2>/dev/null; then
   eval "$(mise activate)"
 fi
 
+
 # Keychain loading is also performed in ~/.profile; it's performed here as well
 # to ensure we're consistently using the homebrew ssh-agent.
-if command -v keychain 1>/dev/null 2>/dev/null && [[ -z $__HAS_KEYCHAIN ]]; then
+if command -v keychain 1>/dev/null 2>/dev/null; then
   eval "$(keychain --eval --quiet)"
-  export __HAS_KEYCHAIN=true
 fi
 
 if command -v zoxide 1>/dev/null 2>&1; then
   eval "$(zoxide init zsh --cmd=cd)"
 fi
+
+if command -v git-machete 1>/dev/null 2>&1; then
+  eval "$(git machete completion zsh)"  # or, if it doesn't work:
+fi
+
 
 ################################################################################
 # oh-my-zsh
