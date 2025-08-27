@@ -164,7 +164,8 @@ if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
         fi
     done
 
-    plugins=($plugins zsh-vi-mode fluxcd)
+    plugins+=(zsh-vi-mode)
+    #plugins+=(fluxcd)
 
     source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 fi
