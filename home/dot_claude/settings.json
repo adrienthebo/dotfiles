@@ -6,14 +6,21 @@
       "Bash(pnpm build:*)",
       "Bash(pnpm format:*)",
       "Bash(pnpm lint:*)",
+      "Bash(pnpm test:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(go test:*)",
+      "Bash(git rev-parse --show-toplevel)",
+      "Bash(git rev-list:*)",
+      "Bash(jq:*)",
+      "Bash(gh pr view --json:*)",
+      "Bash(gh api /repos/*/*/pulls/*/comments)",
+      "Bash(gh api /repos/*/*/issues/*/comments)",
       "WebFetch(domain:biomejs.dev)",
       "WebFetch(domain:reactflow.dev)",
       "WebFetch(domain:www.radix-ui.com)"
     ],
     "deny": []
-  },
-  "feedbackSurveyState": {
-    "lastShownTime": 1754066387913
   },
   "hooks": {
     "Notification": [
@@ -27,6 +34,10 @@
         ]
       }
     ]
+  },
+  "alwaysThinkingEnabled": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754066387913
   },
   "model": "opus"
 }
