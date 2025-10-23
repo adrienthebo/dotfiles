@@ -12,6 +12,8 @@
       "Bash(go test:*)",
       "Bash(git rev-parse --show-toplevel)",
       "Bash(git rev-list:*)",
+      "Bash(git worktree list)",
+      "Bash(git merge-base:*)",
       "Bash(jq:*)",
       "Bash(gh pr view --json:*)",
       "Bash(gh api /repos/*/*/pulls/*/comments)",
