@@ -1,7 +1,7 @@
 ---
 description: Create a PR message in ./DRAFT_MSG and optionally submit as draft
 argument-hint: [base-branch]
-allowed-tools: Bash(git *), Bash(gh pr *), Bash(rm ./DRAFT_MSG), Read, Write, Glob, AskUserQuestion
+allowed-tools: Bash(git status), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(rm ./DRAFT_MSG), Read, Write, Glob, AskUserQuestion
 ---
 
 # Submit Pull Request Command
@@ -30,9 +30,15 @@ Create a pull request message for the current branch. The base branch is "$1" (d
 5. Display `./DRAFT_MSG` contents for review
 6. Ask the user: "Submit as draft PR?"
 7. If yes:
-   ```bash
-   gh pr create --draft --title "<title>" --body "$(cat ./DRAFT_MSG)" && rm ./DRAFT_MSG
-   ```
+   - First check if the branch needs to be pushed: `git rev-parse --abbrev-ref --symbolic-full-name @{u}` (will fail if no upstream)
+   - If no upstream or behind remote, push with proper credentials:
+     ```bash
+     eval "$(keychain --eval)" && git push -u origin "$(git branch --show-current)"
+     ```
+   - Then create the PR:
+     ```bash
+     gh pr create --draft --title "<title>" --body "$(cat ./DRAFT_MSG)" && rm ./DRAFT_MSG
+     ```
    If no, exit. The user can edit `./DRAFT_MSG` and submit manually.
 
 ## Default PR Description Template
