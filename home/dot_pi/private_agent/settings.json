@@ -1,0 +1,24 @@
+{
+  "lastChangelogVersion": "1.0.4",
+  "theme": "dark",
+  "defaultProvider": "vercel-ai-gateway",
+  "defaultModel": "google/gemini-4-argon",
+  "defaultThinkingLevel": "low",
+  "showCacheMissNotices": true,
+  "packages": [
+    "npm:pi-open-tui",
+    "npm:pi-web-access",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:pi-background-tasks",
+    "npm:pi-simplify",
+    "npm:pi-memory",
+    "npm:@gotgenes/pi-permission-system",
+    "npm:@firstpick/pi-extension-cd",
+    "npm:@narumitw/pi-plan-mode",
+    "npm:@gotgenes/pi-subagents@23.2.0",
+    "npm:pi-permission-ai-guard@0.14.0",
+    "/Users/adrien/vercel/src/github.com/adrienthebo/pi-augments/packages/pi-peel-authorizer"
+  ],
+  "editorPaddingX": 1
+}

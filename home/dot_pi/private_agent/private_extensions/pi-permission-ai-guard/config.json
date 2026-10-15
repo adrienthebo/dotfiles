@@ -1,0 +1,32 @@
+{
+  "provider": "vercel-ai-gateway",
+  "model": "anthropic/claude-haiku-5.5",
+  "modelType": "chat",
+  "reasoning": "off",
+  "timeoutMs": 15000,
+  "maxTokens": 4096,
+  "surfaces": ["bash"],
+  "instructions": {
+    "chat": {
+      "rules": "Allow normal development commands that would ordinarily be approved, such as `pnpm build`, `go build`, and `go test`. Treat pnpm script invocations as generally allowable, including variants scoped with `--dir`, `--filter`, or `-F`. Brief directives such as `go` frequently mean to resume the active task or implement the changes already requested; treat the most recent substantive task context as matching intent. When a change is being implemented, `git add` with explicitly named files, a Git commit, or a Git push to the remote for the current topic branch is generally allowable. Do not allow blanket staging commands such as `git add -A`, or any staging command that may unexpectedly add untracked files. Always allow a `cd` command when its destination remains within the current working directory.\n\nDefer other commands that may modify source-controlled files, dependencies, Git state, infrastructure, deployments, or production state unless a recent user message explicitly authorizes that exact effect.",
+      "replace": false
+    }
+  },
+  "fallbacks": [],
+  "mode": "default",
+  "notifyLevel": "info",
+  "notifyApprovals": true,
+  "circuitBreaker": {
+    "consecutive": 3,
+    "total": 20,
+    "verdict": "defer"
+  },
+  "cache": {
+    "maxEntries": 0
+  },
+  "transcript": {
+    "maxUserMessages": 5,
+    "maxToolCalls": 10,
+    "maxCharsPerEntry": 1000
+  }
+}

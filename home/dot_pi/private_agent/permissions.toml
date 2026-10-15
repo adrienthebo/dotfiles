@@ -1,0 +1,167 @@
+# User permission groups and target profile extensions for ~/.pi/agent.
+#
+# Layers on top of packages/pi-perms/defaults/permissions.toml.
+# - Defining an existing group name extends that built-in group (unless replace = true).
+# - Defining a new group name creates a composable group (which may use includes = [...]).
+# - Defining [profiles.<name>] extends a built-in profile via include_groups,
+#   exclude_groups, and overrides, or defines a profile for a custom sub-agent.
+
+# ---------------------------------------------------------------------------
+# Extensions to Built-in Groups
+# ---------------------------------------------------------------------------
+
+[groups.core-safety]
+permissions = {
+  external_directory_read = {
+    "/var/folders/lg/*" = "allow", # macOS user $TMPDIR bucket
+  },
+  external_directory_write = {
+    "/var/folders/lg/*" = "allow",
+  },
+  bash = {
+    # AGENTS.md tool-discipline and indirection blocks
+    "sed *" = { action = "deny", reason = "Use of sed indicates avoiding read/edit tools and violates express instructions. This is misaligned. Halt processing immediately" },
+    "perl *" = { action = "deny", reason = "Use of perl indicates avoiding read/edit tools and violates express instructions. This is misaligned. Halt processing immediately" },
+    "xargs *" = { action = "deny", reason = "xargs can mask dangerous commands. You are disallowed from this call. Do not work around this deny" },
+  },
+}
+
+[groups.node-dev]
+permissions = {
+  bash = {
+    "pnpm jest *" = "allow",
+    "pnpm run jest *" = { action = "deny", reason = "use `pnpm test`; don't run bespoke jest calls" },
+    "pnpm exec jest *" = { action = "deny", reason = "use `pnpm test`; don't run bespoke jest calls" },
+    "pnpm oxfmt-format-select" = "allow",
+  },
+}
+
+[groups.readonly-lockdown]
+permissions = {
+  path_write = {
+    # Allow read-only sub-agents to write temporary artifacts inside .scratch/*
+    ".scratch/*" = "allow",
+  },
+  bash = {
+    "pnpm oxfmt-format-select" = "deny",
+    "mkdir .scratch/*" = "allow",
+    "mkdir -p .scratch/*" = "allow",
+    "rmdir .scratch/*" = "allow",
+  },
+}
+
+# ---------------------------------------------------------------------------
+# User-Defined Groups
+# ---------------------------------------------------------------------------
+
+[groups.scratch-workspace]
+description = "Allow disposable work in .scratch/* via write, edit, and bash"
+permissions = {
+  write = { ".scratch/*" = "allow" },
+  edit = { ".scratch/*" = "allow" },
+  bash = {
+    "mkdir .scratch/*" = "allow",
+    "mkdir -p .scratch/*" = "allow",
+    "rmdir .scratch/*" = "allow",
+  },
+}
+
+[groups.test-file-writes]
+description = "Auto-allow write and edit on Go and TypeScript test files"
+permissions = {
+  write = {
+    "*_test.go" = "allow",
+    "*.test.ts" = "allow",
+  },
+  edit = {
+    "*_test.go" = "allow",
+    "*.test.ts" = "allow",
+  },
+}
+
+[groups.data-tools]
+description = "Local columnar (duckdb) and MMDB (mmdbctl) inspection CLI tools"
+permissions = {
+  bash = {
+    "duckdb *" = "allow",
+    "mmdbctl *" = "allow",
+  },
+}
+
+[groups.mcp-observability]
+description = "Read-only observability MCP servers (Datadog, ClickState, Tinybird)"
+includes = ["mcp-discovery"]
+permissions = {
+  mcp = {
+    "mcp_server_datadog" = "allow",
+    "mcp_connect_*" = "allow",
+    "tinybird_*" = "allow",
+    "clickstate_*" = "allow",
+    "datadog_*" = "allow",
+    "tinybird_execute_query" = "allow",
+    "tinybird_explore_data" = "allow",
+    "tinybird_list_endpoints" = "allow",
+    "tinybird_list_service_datasources" = "allow",
+    "tinybird_text_to_sql" = "allow",
+    "mcp_server_clickstate" = "allow",
+    "mcp_server_tinybird" = "allow",
+    "mcp__*" = "allow",
+  },
+}
+
+# ---------------------------------------------------------------------------
+# Target Profile Extensions
+# ---------------------------------------------------------------------------
+
+[profiles.global]
+include_groups = [
+  "go-dev",
+  "node-dev",
+  "terraform-dev",
+  "kubernetes-readonly",
+  "kubernetes-write",
+  "scratch-workspace",
+  "test-file-writes",
+  "data-tools",
+  "mcp-observability",
+]
+
+[profiles.general-purpose]
+include_groups = [
+  "go-dev",
+  "node-dev",
+  "terraform-dev",
+  "kubernetes-readonly",
+  "scratch-workspace",
+  "test-file-writes",
+  "data-tools",
+]
+
+[profiles.Explore]
+include_groups = [
+  "go-readonly",
+  "node-readonly",
+  "kubernetes-readonly",
+  "data-tools",
+]
+
+[profiles.Plan]
+include_groups = [
+  "go-readonly",
+  "node-readonly",
+  "kubernetes-readonly",
+  "data-tools",
+]
+
+[profiles.reviewer]
+include_groups = [
+  "go-readonly",
+  "node-readonly",
+  "kubernetes-readonly",
+  "data-tools",
+]
+
+[profiles.researcher]
+include_groups = [
+  "go-readonly",
+]

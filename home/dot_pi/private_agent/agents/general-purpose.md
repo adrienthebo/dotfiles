@@ -1,0 +1,216 @@
+---
+description: General-purpose implementation agent
+tools: read, edit, write, grep, find, ls, bash
+prompt_mode: append
+permission:
+  "*": allow
+  external_directory_read:
+    "*": deny
+    "~/.pi/agent/*": allow
+    "~/.agents/skills/*": allow
+    "/tmp/*": allow
+    "/var/folders/lg/*": allow
+    "~/go/pkg/mod/*": allow
+  external_directory_write:
+    "*": deny
+    "/tmp/*": allow
+    "/var/folders/lg/*": allow
+  bash:
+    "*": ask
+    "find * -delete *": deny
+    "find * -exec *": deny
+    "sed *":
+      action: deny
+      reason: "Use of sed indicates avoiding read/edit tools and violates express instructions. This is misaligned. Halt processing immediately"
+    "perl *":
+      action: deny
+      reason: "Use of perl indicates avoiding read/edit tools and violates express instructions. This is misaligned. Halt processing immediately"
+    "xargs *":
+      action: deny
+      reason: "xargs can mask dangerous commands. You are disallowed from this call. Do not work around this deny"
+    "date *": allow
+    "pwd": allow
+    "grep *": allow
+    "head *": allow
+    "tail *": allow
+    "wc *": allow
+    "diff *": allow
+    "nl *": allow
+    "rg *": allow
+    "ls *": allow
+    "jq *": allow
+    "true": allow
+    "base64 *": allow
+    "column *": allow
+    "echo *": allow
+    "python3 *": ask
+    "python3 -m json.tool *": allow
+    "sort *": allow
+    "which *": allow
+    "command -v *": allow
+    "rmdir *": ask
+    "git diff --check": allow
+    "git rev-parse *": allow
+    "git rev-list *": allow
+    "git grep *": allow
+    "git diff *": allow
+    "git blame *": allow
+    "git log *": allow
+    "git merge-base *": allow
+    "git show *": allow
+    "git status *": allow
+    "git branch -a *": allow
+    "git branch -a --contains *": allow
+    "git branch --all --list *": allow
+    "git branch --contains *": allow
+    "git branch --show-current *": allow
+    "git branch -v": allow
+    "git branch -vv": allow
+    "git reflog *": allow
+    "git worktree list": allow
+    "git worktree list *": allow
+    "git remote -v": allow
+    "git ls-files *": allow
+    "git ls-tree *": allow
+    "git add *": ask
+    "git commit *": ask
+    "git rebase *": ask
+    "git stash *": allow
+    "gh run view *": allow
+    "gh pr list *": allow
+    "gh run list *": allow
+    "gh pr view *": allow
+    "gh pr diff *": allow
+    "gh pr checks *": allow
+    "gh pr status *": allow
+    "gh api repos/*/comments *": allow
+    "gh api repos/*/reviews *": allow
+    "gh issue list *": allow
+    "gh issue view *": allow
+    "go env *": allow
+    "go doc *": allow
+    "go list *": allow
+    "go test *": allow
+    "gofmt *": allow
+    "gofmt -w *": allow
+    "go fmt *": allow
+    "errcheck *": allow
+    "staticcheck *": allow
+    "go vet *": allow
+    "go build *": allow
+    "npm *": ask
+    "npm view *": allow
+    "pnpm exec tsc *": allow
+    "pnpm lint": allow
+    "pnpm run lint": allow
+    "pnpm test *": allow
+    "pnpm run test": allow
+    "pnpm format": allow
+    "pnpm run format": allow
+    "pnpm tsc *": allow
+    "pnpm typecheck *": allow
+    "pnpm run typecheck *": allow
+    "npm exec tsc *": allow
+    "npx tsc *": allow
+    "pnpm jest *": allow
+    "pnpm run jest *":
+      action: deny
+      reason: "use `pnpm test`; don't run bespoke jest calls"
+    "pnpm exec jest *":
+      action: deny
+      reason: "use `pnpm test`; don't run bespoke jest calls"
+    "pnpm oxfmt-format-select": allow
+    "tflint *": allow
+    "terraform -chdir * fmt *": allow
+    "kubectl config get-contexts *": allow
+    "kubectl config current-context": allow
+    "kubectl config view *": allow
+    "kubectl get *": allow
+    "kubectl describe *": allow
+    "kubectl logs *": allow
+    "kubectl top *": allow
+    "kubectl explain *": allow
+    "kubectl api-resources *": allow
+    "kubectl version *": allow
+    "kubectl apply *": ask
+    "kubectl delete *": ask
+    "kubectl patch *": ask
+    "kubectl scale *": ask
+    "kubectl rollout restart *": ask
+    "kubectl rollout undo *": ask
+    "kubectl exec *": ask
+    "kubectl port-forward *": ask
+    "kubectl cp *": ask
+    "mkdir .scratch/*": allow
+    "mkdir -p .scratch/*": allow
+    "rmdir .scratch/*": allow
+    "duckdb *": allow
+    "mmdbctl *": allow
+  write:
+    "*": ask
+    ".scratch/*": allow
+    "*_test.go": allow
+    "*.test.ts": allow
+  edit:
+    "*": ask
+    ".scratch/*": allow
+    "*_test.go": allow
+    "*.test.ts": allow
+  read: allow
+  grep: allow
+  find: allow
+  ls: allow
+  mcp: allow
+  subagent: allow
+  get_subagent_result: allow
+  steer_subagent: allow
+  ask_parent: allow
+  notify_parent: allow
+  skill: allow
+  plan_mode_question: allow
+  plan_mode_complete: allow
+  todo: allow
+  todowrite: allow
+  ask_user_question: allow
+  web_search: allow
+  fetch_content: allow
+  get_search_content: allow
+  source_check: allow
+  bg_wait: allow
+  bg_run: allow
+  bg_kill: allow
+  bg_status: allow
+  bg_logs: allow
+  codemode: allow
+  scratchpad: allow
+  path:
+    "*": allow
+    "*.env": deny
+    ".envrc": deny
+    "*.env.*": deny
+    "*.env.example": allow
+    "~/.ssh/*":
+      action: deny
+      reason: "SSH credentials are outside the agent's scope"
+    "~/.aws/*":
+      action: deny
+      reason: "Cloud credentials are outside the agent's scope"
+    "~/.config/gcloud/*":
+      action: deny
+      reason: "Cloud credentials are outside the agent's scope"
+    "~/.kube/config":
+      action: deny
+      reason: "Kubernetes credentials are outside the agent's scope"
+    "~/.pi/agent/auth.json":
+      action: deny
+      reason: "Pi authentication material must not be accessed"
+    "~/.pi/agent/models.json":
+      action: deny
+      reason: "Pi model credentials must not be accessed"
+    "~/.pi/agent/mcp-oauth/*":
+      action: deny
+      reason: "MCP authentication material must not be accessed"
+    "~/.pi/agent/extensions/pi-permission-system/logs/*":
+      action: deny
+      reason: "Permission logs may contain sensitive request details"
+---
