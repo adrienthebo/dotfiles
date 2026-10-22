@@ -1,8 +1,19 @@
 [user]
 	name = Adrien Thebo
 	email = {{ .git.email | quote  }}
+{{- with index .git "signing_key" }}
+	signingKey = {{ . }}
+{{- end }}
 [commit]
   verbose = true
+{{- with index .git "signing_key" }}
+  gpgsign = true
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  defaultKeyCommand = ssh-add -L
+  allowedSignersFile = ~/.ssh/allowed_signers
+{{- end }}
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
@@ -83,8 +94,6 @@
 	branch = false
 [advice]
   detachedHead = false
-
-
 [interactive]
 {{- with .git.features.delta }}
   diffFilter = delta --dark --color-only
@@ -100,8 +109,11 @@
   autoupdate = true
 {{ with .git.features.credential_manager -}}
 [credential]
-  helper = /usr/local/share/gcm-core/git-credential-manager
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
+	useHttpPath = true
+[credential "https://github.com"]
   useHttpPath = true
 {{ end -}}
 {{ with .git.features.lfs -}}
