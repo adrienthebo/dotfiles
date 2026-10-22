@@ -41,3 +41,8 @@ credentials.json
 
 # Mise - ignore when in subdirectory
 /.config/mise.toml
+/.plans
+/.scratch
+
+**/.claude/settings.local.json
+/.pi/extensions/pi-permission-system/config.json
