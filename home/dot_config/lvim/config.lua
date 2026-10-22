@@ -1,8 +1,6 @@
 -- Read the docs: https://www.lunarvim.org/docs/configuration
 -- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
--- Forum: https://www.reddit.com/r/lunarvim/
--- Discord: https://discord.com/invite/Xb9B4Ny
-
+-- Forum: https://www.reddit.com/r/lunarvim/ Discord: https://discord.com/invite/Xb9B4Ny
 lvim.builtin.telescope.defaults.path_display = { "filename_first" }
 lvim.builtin.telescope.defaults.sorting_strategy = "ascending"
 
@@ -10,6 +8,7 @@ lvim.keys.normal_mode["gt"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["gT"] = ":BufferLineCyclePrev<CR>"
 
 lvim.plugins = {
+  { "NoahTheDuke/vim-just", ft = "just" },
   { "terrastruct/d2-vim" },
   { "tpope/vim-surround" },
   { 'towolf/vim-helm',       ft = 'helm' },
@@ -25,55 +24,55 @@ lvim.plugins = {
     end,
   },
   {
-    "HiPhish/rainbow-delimiters.nvim",
-    config = function()
-      vim.defer_fn(function()
-        require('rainbow-delimiters.setup').setup {
-          --strategy = {
-          --  -- ...
-          --},
-          --query = {
-          --  -- ...
-          --},
-          highlight = {
-            'RainbowDelimiterRed',
-            'RainbowDelimiterYellow',
-            'RainbowDelimiterBlue',
-            'RainbowDelimiterOrange',
-            'RainbowDelimiterGreen',
-            'RainbowDelimiterViolet',
-            'RainbowDelimiterCyan',
-          },
-        }
-
-      end, 100)
-    end,
-  },
-  {
-    "kawre/leetcode.nvim",
-    build = ":TSUpdate html",
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
     dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim", -- required by telescope
-      "MunifTanjim/nui.nvim",
-
-      -- optional
-      "nvim-treesitter/nvim-treesitter",
-      "rcarriga/nvim-notify",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      lang = "go",
-      non_standalone = true,
-      -- configuration goes here
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
     },
   },
+  --{
+  --  "HiPhish/rainbow-delimiters.nvim",
+  --  config = function()
+  --    vim.defer_fn(function()
+  --      require('rainbow-delimiters.setup').setup {
+  --        --strategy = {
+  --        --  -- ...
+  --        --},
+  --        --query = {
+  --        --  -- ...
+  --        --},
+  --        highlight = {
+  --          'RainbowDelimiterRed',
+  --          'RainbowDelimiterYellow',
+  --          'RainbowDelimiterBlue',
+  --          'RainbowDelimiterOrange',
+  --          'RainbowDelimiterGreen',
+  --          'RainbowDelimiterViolet',
+  --          'RainbowDelimiterCyan',
+  --        },
+  --      }
+  --    end, 100)
+  --  end,
+  --},
   {
     "f-person/git-blame.nvim",
     event = "BufRead",
     config = function()
       vim.cmd "highlight default link gitblame SpecialComment"
       require("gitblame").setup { enabled = false }
+    end,
+  },
+  {
+    "hedyhli/outline.nvim",
+    config = function()
+      -- Example mapping to toggle outline
+      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>",
+        { desc = "Toggle Outline" })
+
+      require("outline").setup {
+        -- Your setup opts here (leave empty to use defaults)
+      }
     end,
   },
 }
@@ -129,7 +128,9 @@ lspconfig.golangci_lint_ls.setup {}
 lspconfig.gopls.setup {}
 
 lspconfig.rust_analyzer.setup {}
-lspconfig.denols.setup {}
+--lspconfig.denols.setup {}
+
+--vim.lsp.enable({ 'lua_ls', 'gopls', 'pyright' })
 
 ----------------------------------------
 -- Linters
@@ -147,6 +148,12 @@ linters.setup {
 ----------------------------------------
 -- Linters
 ----------------------------------------
+
+vim.filetype.add({
+  extension = {
+    ch = 'sql',
+  },
+})
 
 --------------------------------------------------------------------------------
 -- Bindings
