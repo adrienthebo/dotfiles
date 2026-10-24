@@ -2,9 +2,6 @@
 # Preamble
 ################################################################################
 
-autoload -Uz compinit
-compinit
-
 function pathmunge() {
   if [[ -e $1 ]]; then
     if ! [[ "$PATH" = *"$1"* ]]; then
@@ -28,7 +25,6 @@ fi
 ################################################################################
 # Sourced files
 ################################################################################
-
 
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
@@ -79,23 +75,30 @@ else
 fi
 
 ################################################################################
-# Completions
+# Cached eval — forks a subprocess once, reuses the output until you
+# run: rm -rf ~/.cache/zsh-eval
 ################################################################################
 
-if command -v chezmoi 1>/dev/null 2>&1; then
-    eval "$(chezmoi completion zsh)"
-fi
+_cached_eval() {
+  local name=$1; shift
+  local cache="$HOME/.cache/zsh-eval/$name"
+  if [[ ! -f "$cache" ]]; then
+    mkdir -p "$HOME/.cache/zsh-eval"
+    eval "$@" > "$cache"
+  fi
+  source "$cache"
+}
 
 ################################################################################
 # Shell hooks and services
 ################################################################################
 
 if command -v starship 1>/dev/null 2>&1; then
-    eval "$(starship init zsh)"
+    _cached_eval starship 'starship init zsh'
 fi
 
 if command -v direnv 1>/dev/null 2>&1; then
-    eval "$(direnv hook zsh)"
+    _cached_eval direnv 'direnv hook zsh'
 fi
 
 if command -v atuin 1>/dev/null 2>&1; then
@@ -109,14 +112,12 @@ if command -v atuin 1>/dev/null 2>&1; then
     # hooks must be loaded before oh-my-zsh and zsh-vi-mode.
     #
     # Shell environments are not my favorite environment.
-    eval "$(atuin init zsh)"
-    eval "$(atuin gen-completions --shell zsh)"
+    _cached_eval atuin-init 'atuin init zsh'
 fi
 
 if command -v mise 1>/dev/null 2>/dev/null; then
   eval "$(mise activate)"
 fi
-
 
 # Keychain loading is also performed in ~/.profile; it's performed here as well
 # to ensure we're consistently using the homebrew ssh-agent.
@@ -125,13 +126,10 @@ if command -v keychain 1>/dev/null 2>/dev/null; then
 fi
 
 if command -v zoxide 1>/dev/null 2>&1; then
-  eval "$(zoxide init zsh --cmd=cd)"
+  if [[ -z $CLAUDECODE ]]; then
+    _cached_eval zoxide 'zoxide init zsh --cmd=cd'
+  fi
 fi
-
-if command -v git-machete 1>/dev/null 2>&1; then
-  eval "$(git machete completion zsh)"  # or, if it doesn't work:
-fi
-
 
 ################################################################################
 # oh-my-zsh
@@ -154,7 +152,6 @@ potential_plugins=(
 
 SHOW_AWS_PROMPT=false
 
-
 if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
     zstyle ':omz:*' aliases no
 
@@ -168,6 +165,26 @@ if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
     #plugins+=(fluxcd)
 
     source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
+fi
+
+################################################################################
+# Completions (after oh-my-zsh so compdef is available)
+################################################################################
+
+if command -v chezmoi 1>/dev/null 2>&1; then
+    _cached_eval chezmoi 'chezmoi completion zsh'
+fi
+
+if command -v atuin 1>/dev/null 2>&1; then
+    _cached_eval atuin-comp 'atuin gen-completions --shell zsh'
+fi
+
+if command -v git-machete 1>/dev/null 2>&1; then
+    _cached_eval git-machete 'git machete completion zsh'
+fi
+
+if command -v mise 1>/dev/null 2>&1; then
+    _cached_eval mise 'mise completion zsh'
 fi
 
 # Fight me, zsh-vi-mode
@@ -228,5 +245,15 @@ function whoisip() {
     whois -h whois.cymru.com "$n"
   else
     echo "Usage: whoisip <ASN>"
+  fi
+}
+
+function ipapi() {
+  if [[ -n $1 ]]; then
+    n=$1
+    shift
+    xh "https://api.ipapi.is?q=$n&key=$(cat ~/.cache/ipapi/key)"
+  else
+    echo "Usage: ipapi <IP>"
   fi
 }
